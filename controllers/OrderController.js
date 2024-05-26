@@ -38,6 +38,9 @@ exports.createOrder = asyncErrorHandler(async (req, res, next) => {
 });
 
 exports.changeNumber = asyncErrorHandler(async (req, res, next) => {
+  console.log("object");
+  const idOfOrder = req.params.id;
+
   const user = await User.findById(req.user.id);
   if (!user) {
     const error = new CustomError(
@@ -47,9 +50,11 @@ exports.changeNumber = asyncErrorHandler(async (req, res, next) => {
     next(error);
   }
 
-  user.firstName = req.body.firstName;
-  user.lastName = req.body.lastName;
+  const oorder = await Order.findById(idOfOrder);
+  oorder.phone = req.body.phone;
+  res.status(200).json({ status: "success", order: oorder });
 });
+
 exports.getAllOrder = asyncErrorHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);
   if (!user) {

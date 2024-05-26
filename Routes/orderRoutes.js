@@ -6,11 +6,11 @@ router
   .route("/makeOrder")
   .post(userController.protect, orderController.createOrder);
 router
-  .route("/changeNumber")
+  .route("/changeNumber/:id")
   .patch(userController.protect, orderController.changeNumber);
 
 router
-  .route("/getAllOrder")
+  .route("/getAllOrders")
   .get(userController.protect, orderController.getAllOrder);
 // router
 //   .route("changeAddress")
